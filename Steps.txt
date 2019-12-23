@@ -1,0 +1,8 @@
+1. npm init 
+2. install express | npm i express
+3. install socket.io | npm i socket.io
+4. Crear index.js
+5. Config package.json "scripts"
+6. install nodemon
+
+
