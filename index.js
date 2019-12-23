@@ -8,7 +8,7 @@ const socketIO = require('socket.io');
 app.set('port', process.env.PORT || 3000);
 
 //static files
-app.use(express.static(path.join(__dirname, 'chatWithSockets/src')));
+app.use(express.static(path.join(__dirname, 'dist/chatWithSockets')));
 
 //start the server
 const server = app.listen(app.get('port'), () => {
