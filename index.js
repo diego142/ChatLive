@@ -22,15 +22,25 @@ const io = socketIO(server); //necesita server inicializado
 io.on('connection', (socket) => {
     console.log('new connection', socket.id);
 
+    socket.on('join', (data) => {
+        socket.join(data.room);
+        socket.broadcast.to(data.room).emit('join', data);
+    });
+
+    socket.on('leave', (data) => {
+        console.log('leave: ', data);
+        
+        socket.broadcast.to(data.room).emit('leave', data);
+        socket.leave(data.room);
+    });
+
     socket.on('message', (data) => {
-	console.log(data);
-        io.sockets.emit('message', data);
+	    console.log(data);
+        //socket.broadcast.to(data.room).emit('message', data);
+        io.sockets.to(data.room).emit('message', data);
     });
     
     socket.on('typing', (data) => {
-        socket.broadcast.emit('typing', data);
-        console.log(data);
-        
-        
+        socket.broadcast.to(data.room).emit('typing', data);
     });
 });
